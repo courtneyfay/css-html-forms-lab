@@ -6,9 +6,10 @@
 
 	/*Use Google Fonts to make all of the text Proza Libre.*/
 	font-family: "Proza-Libre", sans-serif;
+	font-size: 16px;
 
 	/*Every container, form, input, and button should have rounded corners.*/
-	border-radius: 4px;
+	border-radius: 6px;
 }
 h1 {
 	/*Make the Title twice as large as the body text, bold, and give it some nice margin.*/
@@ -27,15 +28,19 @@ h1 {
 .formSection-container {
 	float: left;
 	width: 48%;
+	/*The background should be #E3E6EC, and it should align to the middle of its container.*/
+	background-color: #E3E6EC;
+	/*??WHAT is aligning to the middle of the container??*/
 }
 .container-results {
 	float: right;
+	/*The results container should also fill the width of its container, but only up to 500px.*/
 	width: 48%;
+	max-width: 500px;
+	/*The results container should have a background color of #C8DBB3, and comfortable padding around the text.*/
+	background-color: #C8DBB3;
+	padding: 14px;
 }
-/* 
-
-	
-*/
 
 /*-------- Form Styles --------*/
 
@@ -43,48 +48,77 @@ form {
 	/*Make sure the form itself fills the width of whatever container its in, but no larger than 500px.*/
 	width: 100%;
 	max-width: 500px;
-	/*The background should be #E3E6EC, and it should align to the middle of its container.*/
-	background-color: #E3E6EC;
-	/*??WHAT is aligning to the middle of the container??*/
 }
 div {
-	/*Every element should have nice, even padding or margin around it.*/
-	margin: 5%;
+	/* Every element should have nice, even padding or margin around it.*/
+	margin: 2%;
 }
+.row {
+	/* .row elements should be spaced out so they're not touching.*/
+	margin: 2% 2% 2% 5%;
+}
+.formGroup label {
+	/*The labels inside of .formGroup should be on their own line above form options, fill the width of their container, and have top/bottom padding.*/
+	display: block;
+	width: 100%;
+	padding: 2% 0px;
+}
+#name, #verb-1, #mission, #noun-1, #noun-2 {
+	width: 90%;
+}
+.formGroup {
+	/* .formGroup elements should fill the width of their container, and be inline-block.*/
+	width: 100%;
+	display: inline-block;
+}
+/* Radio buttons and checkbox options should each be on their own line, and indented a little.*/ 
+.radio, .check {
+	margin: 10px 10px 10px 20px;
+	vertical-align: middle;
+}
+/* Radio buttons and checkbox labels should be directly to the right of their corresponding inputs, and the text should vertically align with the inputs. */
+.radio label {
+	display: inline;
+}
+.check label {
+	display: inline;
+}
+/* Text inputs, submit buttons, and select boxes should all be at least 48px tall. The should have 14px of padding around their text. */
+/* Text inputs, select boxes, and textareas should have a 1px border that's #CCC, and none of the default shadows.*/
+input  {
+	/*display: block;*/
+	min-height: 48px;
+	padding: 14px;
+	border: #CCC 1px solid;
+	box-shadow: none;
+}
+textarea {
+	/* Textareas should be at least 100px tall.*/
+	min-height: 100px;
+	border: #CCC 1px solid;
+	box-shadow: none;
+}
+input[type=submit] {
+	/*The submit button should float to the right, be bolded, and only be as wide as the text makes it.*/
+	float: right;
+	display: inline-block;
+	font-weight: 800;
+	position: relative;
+	right: 10%;
+	width: auto;
+	/*The submit button should be rga(39, 208, 127), but only 50% opacity.*/
+	background-color: rgba(39, 208, 127, .5);
+}
+input[type=submit]:hover {
+	/*On hover, it should be 100% opacity.*/
+	background-color: rgba(39, 208, 127, 1);
+}
+ 
 
-/* 
-	.row elements should be spaced out so they're not touching.
-
-	.formGroup elements should fill the width of their container, and be inline-block.
-
-	The labels inside of .formGroup should be on their own line above form options, fill the width of their container, and have top/bottom padding.
-
-	Radio buttons and checkbox options should each be on their own line, and indented a little. 
-
-	Radio buttons and checkbox labels should be directly to the right of their corresponding inputs, and the text should vertically align with the inputs. 
-
-	Text inputs, submit buttons, and select boxes should all be at least 48px tall. The should have 14px of padding around their text. 
-
-	Textareas should be at least 100px tall.
-
-	Text inputs, select boxes, and textareas should have a 1px border that's #CCC, and none of the default shadows.
-
-	The submit button should float to the right, be bolded, and only be as wide as the text makes it.
-
-	The submit button should be rga(39, 208, 127), but only 50% opacity. On hover, it should be 100% opacity.
 	
 	
-*/
+	
 
 
-/*-------- Results Styles --------*/
 
-
-/* 
-
-	The results container should also fill the width of its container, but only up to 500px.
-
-	The results container should have a background color of #C8DBB3, and comfortable padding around the text.
-
-*/
 
