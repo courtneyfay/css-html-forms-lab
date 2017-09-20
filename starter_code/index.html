@@ -112,6 +112,8 @@
 	<script type="text/javascript">
 
 		var main = $('#main');
+		var splitAgain = {};
+
 		function makeResults() {
 
 			$( "<section class='container-results'>").appendTo(main);
@@ -127,29 +129,25 @@
 
 			// Finding the input values
 	    	let serializedValues = $("form").serialize();
-	    	//JSON.parse and JSON.stringify
+	    	//splits the serialized string into smaller chunks using & symbol
 			let splitSerialize = serializedValues.split("&");
 
-			var splitAgain = {};
+			console.log(splitSerialize);
 
 			for (let i = 0; i < splitSerialize.length; i++) {
-				var resultOfSecondSplit = splitSerialize[i].split("=");
-				//splitAgain[resultOfSecondSplit[i]] = resultOfSecondSplit[i+1];
+				// Removes the %20 from strings with spaces in them
+				var removeURI = decodeURIComponent(splitSerialize[i]);
+				var resultOfSecondSplit = removeURI.split("=");
+				
+				console.log(splitSerialize[i]);
+				splitAgain[resultOfSecondSplit[0]] = resultOfSecondSplit[1];
 
-				//console.log(resultOfSecondSplit);
-				console.log(resultOfSecondSplit[0]);
-				console.log(resultOfSecondSplit[1]); 	
+				//STILL NEED TO WORK ON CONDITIONAL LOGIC FOR CHECKBOXES -- what to do when there are 2 or 3 checked?
+				//if () {	
+				//}
 			}
 			console.log(splitAgain);
-		
 		};
-
-	    	// console.log($("input[name=verb-1]").val());
-	    	// console.log($("input#mission").val());
-	    	// console.log($("input.radioButtons").val()); //adjective1
-	    	// 	console.log($("input#noun-1").val());
-	    	// console.log($("input.checkboxes").val()); //adjective2
-	    	// 	console.log($("input#noun-2").val());
 
 		$("form").on("submit", function(event){
 
@@ -159,14 +157,6 @@
 	    	// Run the 'makeResults' function seen above
 	    	makeResults();
 
-	    	// 1. For each value entered into a form input
-	    	// 2. add the input to the corresponding sentence, 
-			// 3. then append the text into the results section:
-
-	    	// 1. first step is to find the input values -- use .serialize() ??
-	    	// 2. next step is to save the input values into localStorage!
-	    	// 3. last step is to append the input values to the results section
-
 	    	// adds heading to the story
 	    	let containerResults = $(".container-results");
 	    	let storyHeading = "<h1>A True Story:</h1>";
@@ -174,18 +164,27 @@
 
 	    	// adds paragraph HTML element to the story
 	    	let storyParagraph = "<p>dummy Text</p>";
-	    	
+
 	    	// assigns variables to user inputs
 	    	serializeInputs();
-	    	let userName = $("input#name").val();
+
+	    	// creates the new MadLibs text complete with variables to be inserted into the <p> element
+	    	// if the madlibs input field is blank, creates dummy text so the madLibs always looks complete
+	    	let userName = splitAgain["name"] || "Court" ;
+	    	let verb1 = splitAgain["verb-1"] || "explore";
+	    	let missionStatement = splitAgain["mission"] || "Live, laugh, love ahh ha ha ha";
+	    	let adjective1 = splitAgain["sentiment"] || "dubious";
+	    	let noun1 = splitAgain["noun-1"] || "treeeees";
+	    	let adjective2 = splitAgain["adjective-2"] || "dedicated";
+	    	let noun2 = splitAgain["noun-2"] || "hodor";
 	    	
 	    	let sentence1 = "Once upon a time there was a Developer named " + userName + ". ";
-	    	let sentence2 = userName + " came to General Asssembly to " + "VERB1" + " the great mountain of programming knowledge. ";
-	    	let sentence3 = "MISSION, " + userName + " shouted. ";
-			let sentence4 = "Though SENTIMENT, " + userName + " was able to overcome all obstacles with the power of their " + "NOUN" + ". ";
-			let sentence5 = "In the end, their success can be contributed entirely to their " + "ADJECTIVE2, " + "ADJECTIVE3, " + "ADJECTIVE4 " + "NOUN2" + ".";
+	    	let sentence2 = userName + " came to General Asssembly to " + verb1 + " the great mountain of programming knowledge. ";
+	    	let sentence3 = '"' + missionStatement + '," '  + userName + ' shouted. ';
+			let sentence4 = "Though " + adjective1 + ", " + userName + " was able to overcome all obstacles with the power of their " + noun1 + ". ";
+			let sentence5 = "In the end, their success can be contributed entirely to their " + adjective2 + " " + noun2 + ".";
 
-			// changes dummy text to MadLibs paragraph text
+			// replaces dummy text with MadLibs paragraph text
 	    	containerResults.append(storyParagraph);
 	    	$('p').html(sentence1 + sentence2 + sentence3 + sentence4 + sentence5);
 		});
