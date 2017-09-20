@@ -2,17 +2,22 @@
 <html>
 <head>
 	<title>CSS HTML Forms Lab</title>
+	<link href="https://fonts.googleapis.com/css?family=Proza+Libre:400,500,600,700,800" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<section id="main">
-		<section class="formSection container">
+		<section class="formSection-container">
 			<form class="form" method="GET">
 					<h1>My Dev Story</h1>
+					
+					<!-- Name input -->
 					<div class="row formGroup">
 					    <label for="name">Name:</label>
 					    <input id="name" name="name" >
 				    </div>
+
+				    <!-- Cautious/Confident/Over-Confident Verb input -->
 					<div class="row formGroup">
 				    	<label for="verb-1">Verb:</label>
 				    	<select id="verb-1" name="verb-1">
@@ -33,11 +38,14 @@
 				    		</optgroup>
 				    	</select>
 					</div>
+
+					<!-- Mission Statement input -->
 					<div class="row formGroup">
-				    	<label for="mission">Misison Statement:</label>
+				    	<label for="mission">Mission Statement:</label>
 				    	<textarea id="mission" name="mission"></textarea>
 					</div>
 
+					<!-- Adjective input -->
 					<div class="row formGroup">
 						<label for="radioButtons">Sentiment:</label>
 						<div class="radioButtons">
@@ -56,10 +64,13 @@
 				    	</div>
 					</div>
 					
+					<!-- Noun input -->
 					<div class="row formGroup">
 				    	<label for="noun-1">Noun:</label>
 				    	<input id="noun-1" name="noun-1">
 					</div>
+
+					<!-- Adjective input -->
 					<div class="row formGroup">
 	
 						<label for="checkboxes">Sentiment:</label>
@@ -79,10 +90,14 @@
 				    	</div>
 
 					</div>
+
+					<!-- Noun input -->
 					<div class="row formGroup">
 				    	<label for="noun-2">Noun:</label>
 				    	<input id="noun-2" name="noun-2">
 					</div>
+
+					<!-- Submit button -->
 					<div class="row formGroup">
 				    	<input type="submit">
 				    </div>
@@ -99,36 +114,80 @@
 		var main = $('#main');
 		function makeResults() {
 
-			$( "<section class='container results'><h1>A True Story:</h1>" ).appendTo(main);
+			$( "<section class='container-results'>").appendTo(main);
 
-			// JS Native:
+			// vanilla JS:
 			// var results = document.createElement('section');
 			// results.innerHTML = '<h1>' + 'A true story:' + '</h1>';
 			// results.className = 'container results';
 			// main.appendChild(results);
 		};
 
+		function serializeInputs() {
+
+			// Finding the input values
+	    	let serializedValues = $("form").serialize();
+	    	//JSON.parse and JSON.stringify
+			let splitSerialize = serializedValues.split("&");
+
+			var splitAgain = {};
+
+			for (let i = 0; i < splitSerialize.length; i++) {
+				var resultOfSecondSplit = splitSerialize[i].split("=");
+				//splitAgain[resultOfSecondSplit[i]] = resultOfSecondSplit[i+1];
+
+				//console.log(resultOfSecondSplit);
+				console.log(resultOfSecondSplit[0]);
+				console.log(resultOfSecondSplit[1]); 	
+			}
+			console.log(splitAgain);
+		
+		};
+
+	    	// console.log($("input[name=verb-1]").val());
+	    	// console.log($("input#mission").val());
+	    	// console.log($("input.radioButtons").val()); //adjective1
+	    	// 	console.log($("input#noun-1").val());
+	    	// console.log($("input.checkboxes").val()); //adjective2
+	    	// 	console.log($("input#noun-2").val());
+
 		$("form").on("submit", function(event){
 
 		    // Stop the form from submitting
+		    event.preventDefault();
 
 	    	// Run the 'makeResults' function seen above
+	    	makeResults();
 
-	    	/*
-			
-				For each value entered into a form input, add the input to the corresponding sentence, then append the text into the results section:
+	    	// 1. For each value entered into a form input
+	    	// 2. add the input to the corresponding sentence, 
+			// 3. then append the text into the results section:
 
-				"Once upon a time there was a Developer named NAME."
+	    	// 1. first step is to find the input values -- use .serialize() ??
+	    	// 2. next step is to save the input values into localStorage!
+	    	// 3. last step is to append the input values to the results section
 
-				"NAME came to General Asssembly to VERB1 the great mountain of programming knowledge."
+	    	// adds heading to the story
+	    	let containerResults = $(".container-results");
+	    	let storyHeading = "<h1>A True Story:</h1>";
+	    	containerResults.append(storyHeading);
 
-				""MISSION", NAME shouted."
-	
-				"Though SENTIMENT, NAME was able to overcome all obstacles with the power of their NOUN."
+	    	// adds paragraph HTML element to the story
+	    	let storyParagraph = "<p>dummy Text</p>";
+	    	
+	    	// assigns variables to user inputs
+	    	serializeInputs();
+	    	let userName = $("input#name").val();
+	    	
+	    	let sentence1 = "Once upon a time there was a Developer named " + userName + ". ";
+	    	let sentence2 = userName + " came to General Asssembly to " + "VERB1" + " the great mountain of programming knowledge. ";
+	    	let sentence3 = "MISSION, " + userName + " shouted. ";
+			let sentence4 = "Though SENTIMENT, " + userName + " was able to overcome all obstacles with the power of their " + "NOUN" + ". ";
+			let sentence5 = "In the end, their success can be contributed entirely to their " + "ADJECTIVE2, " + "ADJECTIVE3, " + "ADJECTIVE4 " + "NOUN2" + ".";
 
-				"In the end, their success can be contributed entirely to their " + ADJECTIVE2[list each one checked, comma-separated] + NOUN2."
-
-	    	*/ 
+			// changes dummy text to MadLibs paragraph text
+	    	containerResults.append(storyParagraph);
+	    	$('p').html(sentence1 + sentence2 + sentence3 + sentence4 + sentence5);
 		});
 	</script>
 

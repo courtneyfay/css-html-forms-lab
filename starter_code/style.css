@@ -1,36 +1,64 @@
 /*-------- Utility Styles --------*/
 * {
-	box-sizing: border-box; 
 	/* ^^^ Forces all elements to include content, padding, and border as part of their width/height calculation: 
 	http://www.w3schools.com/cssref/css3_pr_box-sizing.asp */
+	box-sizing: border-box; 
+
+	/*Use Google Fonts to make all of the text Proza Libre.*/
+	font-family: "Proza-Libre", sans-serif;
+
+	/*Every container, form, input, and button should have rounded corners.*/
+	border-radius: 4px;
 }
-
-/* 
-	Use Google Fonts to make all of the text Proza Libre.
-
-	Make the Title twice as large as the body text, bold, and give it some nice margin.
-*/
+h1 {
+	/*Make the Title twice as large as the body text, bold, and give it some nice margin.*/
+	font-size: 30px;
+	margin: 5%;
+}
 
 /*-------- Main Styles --------*/
 
+#main {
+	/*Make the main container the full width of the page.*/
+	width: 100%;
+}
+
+/*Make the two inner containers (the form and the results) float side by side, on the left side of the screen.*/
+.formSection-container {
+	float: left;
+	width: 48%;
+}
+.container-results {
+	float: right;
+	width: 48%;
+}
 /* 
-	Make the main container the full width of the page.
 
-	Make the two inner containers (the form and the results) float side by side, on the left side of the screen.
-
-	Every container, form, input, and button should have rounded corners.
+	
 */
 
 /*-------- Form Styles --------*/
 
+form {
+	/*Make sure the form itself fills the width of whatever container its in, but no larger than 500px.*/
+	width: 100%;
+	max-width: 500px;
+	/*The background should be #E3E6EC, and it should align to the middle of its container.*/
+	background-color: #E3E6EC;
+	/*??WHAT is aligning to the middle of the container??*/
+}
+div {
+	/*Every element should have nice, even padding or margin around it.*/
+	margin: 5%;
+}
 
 /* 
 
-	Make sure the form itself fills the width of whatever container its in, but no larger than 500px.
 	
-	The background should be #E3E6EC, and it should align to the middle of its container.
 	
-	Every element should have nice, even padding or margin around it.
+	
+	
+	
 
 	.row elements should be spaced out so they're not touching.
 
